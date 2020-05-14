@@ -4,15 +4,15 @@ import Proptypes from 'prop-types';
 
 const Button = ({
   name,
-  borderColor = 'black',
-  fillingColor = 'black',
-  textColor = 'black',
-  textHoverColor = 'white',
-  IsInvert = true,
+  borderColor,
+  fillingColor,
+  textColor,
+  textHoverColor,
+  IsInvert,
   ...props
 }) => {
-  const StyledButton = styled.button`
-    background-color: ${IsInvert} ? white : ${fillingColor};
+  const ButtonComponent = styled.button`
+    background-color: ${() => (IsInvert ? 'white' : `${fillingColor}`)};
     border: none;
     color: ${textColor};
     padding: 16px 32px;
@@ -24,19 +24,28 @@ const Button = ({
     transition-duration: 0.4s;
     cursor: pointer;
     border: 2px solid ${borderColor};
-    &:hover {
-      background-color: ${IsInvert} ? ${fillingColor} : white;
-      color: ${IsInvert} ? ${textHoverColor} : ${textColor};
+  `;
+  const ButtonContainer = styled.div`
+    &:hover ${ButtonComponent} {
+      background-color: ${() => (IsInvert ? fillingColor : 'white')};
+      color: ${() => (IsInvert ? textHoverColor : textColor)};
     }
   `;
-
   return (
-    <div>
-      <StyledButton {...props}>{name}</StyledButton>
-    </div>
+    <ButtonContainer>
+      <ButtonComponent {...props}>{name}</ButtonComponent>
+    </ButtonContainer>
   );
 };
 
+Button.defaultProps = {
+  name: '',
+  borderColor: 'black',
+  fillingColor: 'black',
+  textHoverColor: 'black',
+  textColor: 'white',
+  IsInvert: false
+};
 Button.propTypes = {
   name: Proptypes.string,
   borderColor: Proptypes.string,

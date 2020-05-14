@@ -1,55 +1,45 @@
 import React from 'react';
 import FormInput from '../atoms/FormInput';
-import Button from '../atoms/button';
+import Button from '../atoms/Button';
 import styled from 'styled-components';
 
-const LoginContainer = styled.div`
-  background-color: transparent;
-  border: 2px solid red;
-  padding: 20px;
-  border-radius: 20px;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-`;
+const Login = props => {
+  const LoginContainer = styled.div`
+    background-color: ${props => props.theme.orange};
+    padding: 20px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  `;
 
-const LoginBackgroundImage = styled.img`
-  position: absolute;
-  z-index: -1;
-  width: auto;
-  height: 100%;
-`;
-
-const LoginMarvelLogo = styled.img`
-  width: 100%;
-  height: auto;
-  margin-bottom: 6em;
-`;
-
-const Login = () => {
+  const LoginLogo = styled.img`
+    width: 100%;
+    height: auto;
+    margin-bottom: 0.001em;
+  `;
   return (
-    <div>
-      <LoginBackgroundImage src='https://imgc.allpostersimages.com/img/print/u-g-PWAB260.jpg?w=550&h=550&p=0'></LoginBackgroundImage>
-      <LoginMarvelLogo
-        src='/marvelLogo.png'
-        alt='marvel logo'
-      ></LoginMarvelLogo>
-      <LoginContainer>
-        <FormInput type='text' placeholder='Login' inputColor='red'></FormInput>
-        <FormInput
-          placeholder='Password'
-          type='password'
-          inputColor='red'
-        ></FormInput>
-        <Button
-          name='Valider'
-          borderColor='green'
-          textHoverColor='white'
-          fillingColor='green'
-        ></Button>
-      </LoginContainer>
-    </div>
+    <LoginContainer>
+      <LoginLogo src='/logo.png' alt='marvel logo'></LoginLogo>
+      <FormInput
+        type='text'
+        placeholder='Login'
+        inputColor={props => props.theme.primary}
+      ></FormInput>
+      <FormInput
+        placeholder='Password'
+        type='password'
+        inputColor={props => props.theme.primary}
+      ></FormInput>
+      <Button
+        name='Valider'
+        borderColor={props => props.theme.primary}
+        textHoverColor={props => props.theme.dark}
+        fillingColor={props => props.theme.primary}
+        textColor={props => props.theme.white}
+        IsInvert={false}
+      ></Button>
+    </LoginContainer>
   );
 };
 
