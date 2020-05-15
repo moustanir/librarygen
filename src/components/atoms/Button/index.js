@@ -46,6 +46,7 @@ Button.defaultProps = {
   textColor: 'white',
   IsInvert: false
 };
+
 Button.propTypes = {
   name: Proptypes.string,
   borderColor: Proptypes.string,

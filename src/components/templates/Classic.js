@@ -1,5 +1,5 @@
 import React from 'react';
-import FullSidebar from '../organisms/FullSidebar';
+import Navbar from '../organisms/Navbar';
 import styled from 'styled-components';
 
 const PageContainer = styled.div`
@@ -10,7 +10,7 @@ const PageContainer = styled.div`
 const Classic = props => {
   return (
     <PageContainer>
-      <FullSidebar></FullSidebar>
+      <Navbar></Navbar>
       {props.children}
     </PageContainer>
   );

@@ -18,12 +18,12 @@ const Routes = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path='/login' component={Login} />
         <Route exact path='/' component={Home} />
-        <Route exact path='/books' component={BooksList} />
-        <Route exact path='/user/books' component={UserBooks} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/user/:userId/books' component={UserBooks} />
         <Route exact path='/books/upload' component={UploadBooks} />
         <Route exact path='/books/:id' component={BookDetails} />
+        <Route exact path='/books' component={BooksList} />
         <Route exact path='/books/read/:id' component={BookReader} />
         <Redirect to='/'></Redirect>
       </Switch>

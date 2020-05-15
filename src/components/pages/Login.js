@@ -1,16 +1,19 @@
-import React from 'react';
-import FormInput from '../atoms/FormInput';
+import React, { useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components';
+import FormInput from '../atoms/Input';
 import Button from '../atoms/Button';
-import styled from 'styled-components';
 
 const Login = props => {
+  const theme = useContext(ThemeContext);
+
   const LoginContainer = styled.div`
-    background-color: ${props => props.theme.orange};
+    background-color: ${theme.white};
     padding: 20px;
-    justify-content: center;
+    justify-content: space-between;
     display: flex;
     flex-direction: column;
     align-content: center;
+    a: ;
   `;
 
   const LoginLogo = styled.img`
@@ -22,22 +25,24 @@ const Login = props => {
     <LoginContainer>
       <LoginLogo src='/logo.png' alt='marvel logo'></LoginLogo>
       <FormInput
-        type='text'
+        type='email'
         placeholder='Login'
-        inputColor={props => props.theme.primary}
+        inputName='Email'
+        inputColor={theme.primary}
       ></FormInput>
       <FormInput
         placeholder='Password'
+        inputName='Password'
         type='password'
-        inputColor={props => props.theme.primary}
+        inputColor={theme.primary}
       ></FormInput>
       <Button
         name='Valider'
-        borderColor={props => props.theme.primary}
-        textHoverColor={props => props.theme.dark}
-        fillingColor={props => props.theme.primary}
-        textColor={props => props.theme.white}
-        IsInvert={false}
+        borderColor={theme.primary}
+        textHoverColor={theme.white}
+        fillingColor={theme.primary}
+        textColor={theme.dark}
+        IsInvert={true}
       ></Button>
     </LoginContainer>
   );
