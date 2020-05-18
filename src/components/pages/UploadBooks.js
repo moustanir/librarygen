@@ -21,6 +21,14 @@ const InfoContainer = styled.div`
   justify-content: space-evenly;
 `;
 
+const SpanErrorContainer = styled.span`
+  color: ${props => props.color};
+`;
+const UploadContainer = styled.div`
+  @media ${props => props.size[0]} {
+    padding: 10em;
+  }
+`;
 const UploadBooks = props => {
   const theme = useContext(ThemeContext);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -33,14 +41,6 @@ const UploadBooks = props => {
     releaseDate: '',
     description: ''
   });
-  const SpanErrorContainer = styled.span`
-    color: ${theme.colors.red};
-  `;
-  const UploadContainer = styled.div`
-    @media ${theme.sizes.laptop} {
-      padding: 10em;
-    }
-  `;
 
   const OnFileChange = event => {
     setSelectedFile(event.target.files[0]);
@@ -99,7 +99,7 @@ const UploadBooks = props => {
   useEffect(() => {}, [bookInfo, selectedFile]);
   return (
     <Classic>
-      <UploadContainer>
+      <UploadContainer size={[theme.sizes.laptop]}>
         <div>
           <input type='file' onChange={OnFileChange} />
         </div>
@@ -163,7 +163,9 @@ const UploadBooks = props => {
             onClick={OnFileUpload}
           ></Button>
         </ButtonContainer>
-        <SpanErrorContainer>{errorMessage}</SpanErrorContainer>
+        <SpanErrorContainer color={theme.colors.red}>
+          {errorMessage}
+        </SpanErrorContainer>
       </UploadContainer>
     </Classic>
   );

@@ -6,23 +6,8 @@ import Button from '../atoms/Button';
 const Login = props => {
   const theme = useContext(ThemeContext);
 
-  const LoginContainer = styled.div`
-    background-color: ${theme.white};
-    padding: 20px;
-    justify-content: space-between;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    a: ;
-  `;
-
-  const LoginLogo = styled.img`
-    width: 100%;
-    height: auto;
-    margin-bottom: 0.001em;
-  `;
   return (
-    <LoginContainer>
+    <LoginContainer colorBackground={theme.white}>
       <LoginLogo src='/logo.png' alt='marvel logo'></LoginLogo>
       <FormInput
         type='email'
@@ -47,5 +32,20 @@ const Login = props => {
     </LoginContainer>
   );
 };
+
+const LoginContainer = styled.div`
+  background-color: ${props => props.colorBackground};
+  padding: 20px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+`;
+
+const LoginLogo = styled.img`
+  width: 100%;
+  height: auto;
+  margin-bottom: 0.001em;
+`;
 
 export default Login;

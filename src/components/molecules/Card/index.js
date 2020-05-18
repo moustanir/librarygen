@@ -1,32 +1,38 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Card = ({ src, description, name, id }) => {
+  const theme = useContext(ThemeContext);
+
   return (
-    <CardContainer>
+    <CardContainer sizeLimit={theme.sizes.laptop}>
       <Image src={src} alt={`${name}`}></Image>
       <DescriptionContainer>
         <Title href={`/books/read/${id}`}>{name}</Title>
-        <p>{description}</p>
+        <Content>{description}</Content>
       </DescriptionContainer>
     </CardContainer>
   );
 };
-
 const CardContainer = styled.div`
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  width: 100%;
-  max-width: 20em;
-  &:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row;
+  border: 1px solid gray;
+  box-shadow: 5px 5px #ccc;
+  padding: 10px;
+  margin: 10px;
+
+  @media ${props => props.sizelimit} {
+    flex-direction: column;
   }
 `;
+const Content = styled.div`
+  padding: 10px;
+`;
 const Image = styled.img`
-  width: 100%;
   height: auto;
-  max-width: 20em;
+  width: 100%;
 `;
 const DescriptionContainer = styled.div`
   padding: 2px 16px;

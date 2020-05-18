@@ -11,32 +11,43 @@ const Button = ({
   IsInvert,
   ...props
 }) => {
-  const ButtonComponent = styled.button`
-    background-color: ${() => (IsInvert ? 'white' : `${fillingColor}`)};
-    border: none;
-    color: ${textColor};
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border: 2px solid ${borderColor};
-  `;
-  const ButtonContainer = styled.div`
-    &:hover ${ButtonComponent} {
-      background-color: ${() => (IsInvert ? fillingColor : 'white')};
-      color: ${() => (IsInvert ? textHoverColor : textColor)};
-    }
-  `;
   return (
     <ButtonContainer>
-      <ButtonComponent {...props}>{name}</ButtonComponent>
+      <ButtonComponent
+        IsInvert={IsInvert}
+        textHoverColor={textHoverColor}
+        textColor={textColor}
+        fillingColor={fillingColor}
+        borderColor={borderColor}
+        {...props}
+      >
+        {name}
+      </ButtonComponent>
     </ButtonContainer>
   );
 };
+const ButtonComponent = styled.button`
+  background-color: ${props =>
+    props.IsInvert ? `${props.fillingColor}` : 'white'};
+  border: none;
+  color: ${props => props.textColor};
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border: 2px solid ${props => props.borderColor};
+  &:hover {
+    background-color: ${props =>
+      props.IsInvert ? 'white' : props.fillingColor};
+    color: ${props =>
+      props.IsInvert ? props.textHoverColor : props.textColor};
+  }
+`;
+const ButtonContainer = styled.div``;
 
 Button.defaultProps = {
   name: '',
