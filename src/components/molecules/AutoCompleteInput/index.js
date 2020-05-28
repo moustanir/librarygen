@@ -28,7 +28,7 @@ const AutoCompleteInput = ({
         borderColor='green'
         fillingColor='green'
         IsInvert={true}
-        textColor='white'
+        textColor='black'
         textHoverColor='green'
         onClick={() => {
           onClickAction(document.getElementById(`autocomplete-${name}`).value);

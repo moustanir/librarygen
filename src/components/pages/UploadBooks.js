@@ -5,33 +5,11 @@ import Input from '../atoms/Input';
 import Button from '../atoms/Button';
 import Textarea from '../atoms/Textarea';
 
-const ButtonContainer = styled.div`
-  div {
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 3em;
-  }
-`;
-
-const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items:stretch
-  width: 100%;
-  justify-content: space-evenly;
-`;
-
-const SpanErrorContainer = styled.span`
-  color: ${props => props.color};
-`;
-const UploadContainer = styled.div`
-  @media ${props => props.size[0]} {
-    padding: 10em;
-  }
-`;
 const UploadBooks = props => {
   const theme = useContext(ThemeContext);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [coverBook, setcoverBook] = useState(null);
+  const [coverPreviewBook, setcoverPreviewBook] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [bookInfo, setBookInfo] = useState({
     name: '',
@@ -45,7 +23,10 @@ const UploadBooks = props => {
   const OnFileChange = event => {
     setSelectedFile(event.target.files[0]);
   };
-
+  const uploadCoverBook = event => {
+    setcoverBook(event.target.files[0]);
+    setcoverPreviewBook(URL.createObjectURL(event.target.files[0]));
+  };
   // On file upload (click the upload button)
   const OnFileUpload = () => {
     // Create an object of formData
@@ -91,18 +72,35 @@ const UploadBooks = props => {
       return;
     }
 
-    formData.append('myFile', selectedFile, selectedFile.name);
+    formData.append('book', selectedFile, selectedFile.name);
+    formData.append('book_cover', coverBook, coverBook.name);
     formData.append('bookInfo', bookInfo);
 
-    console.log(selectedFile, bookInfo);
+    console.log(selectedFile, coverBook, bookInfo);
+    console.log(formData);
   };
   useEffect(() => {}, [bookInfo, selectedFile]);
+
+  const triggerUploadfile = () => {
+    document.getElementById('upload-cover').click();
+  };
   return (
     <Classic>
       <UploadContainer size={[theme.sizes.laptop]}>
-        <div>
+        <UploadCoverZone onClick={triggerUploadfile}>
+          <h5>Couverture du livre</h5>
+          <UploadCover
+            id='upload-cover'
+            type='file'
+            onChange={uploadCoverBook}
+          ></UploadCover>
+          <CoverPreview src={coverPreviewBook} />
+          <div></div>
+        </UploadCoverZone>
+        <section>
+          <h5>Upload de votre livre</h5>
           <input type='file' onChange={OnFileChange} />
-        </div>
+        </section>
         <InfoContainer>
           <Input
             inputColor={theme.colors.orange}
@@ -159,7 +157,7 @@ const UploadBooks = props => {
             textHoverColor={theme.colors.white}
             fillingColor={theme.colors.primary}
             textColor={theme.colors.dark}
-            IsInvert={true}
+            IsInvert={false}
             onClick={OnFileUpload}
           ></Button>
         </ButtonContainer>
@@ -170,5 +168,48 @@ const UploadBooks = props => {
     </Classic>
   );
 };
+
+const UploadCoverZone = styled.div`
+  cursor: pointer;
+  width: 30%;
+  height: auto;
+  padding: 5em;
+  border: 2px dashed black;
+`;
+const UploadCover = styled.input`
+  display: none;
+`;
+const CoverPreview = styled.img`
+  height: auto;
+  width: 100%;
+  max-width: 20em;
+  margin: 0 auto;
+  text-align: center;
+`;
+const ButtonContainer = styled.div`
+  div {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 3em;
+  }
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items:stretch
+  width: 100%;
+  justify-content: space-evenly;
+`;
+
+const SpanErrorContainer = styled.span`
+  color: ${props => props.color};
+`;
+
+const UploadContainer = styled.div`
+  @media ${props => props.size[0]} {
+    padding: 10em;
+  }
+`;
 
 export default UploadBooks;

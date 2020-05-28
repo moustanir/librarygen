@@ -1,12 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SidebarMenu = props => {
-  return <SidebarComponent>{props.children}</SidebarComponent>;
+const NavbarMenu = props => {
+  return <NavbarContainer>{props.children}</NavbarContainer>;
 };
-const SidebarComponent = styled.div`
-  overflow: hidden;
-  background-color: ${props => props.theme.orange};
+
+const NavbarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  list-style: none;
+  background-color: #333;
+  justify-content: space-between;
+  height: 100%;
+  max-height: 116em;
 `;
 
-export default SidebarMenu;
+export default NavbarMenu;

@@ -2,32 +2,33 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const SidebarMenuItem = ({ link, name, isActive = false, ...props }) => {
-  const SidebarMenuItemComponent = styled.a`
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    &:hover {
-      background-color: ${props => props.theme.lightPrimary};
-      color: white;
-    }
-    &:active {
-      background-color: ${props => props.theme.lightPrimary};
-      color: white;
-    }
-  `;
-  console.log(name);
+const NavbarMenuItem = ({ link, name, isActive = false, ...props }) => {
   return (
-    <SidebarMenuItemComponent href={link}>{name}</SidebarMenuItemComponent>
+    <NavbarItem isActive={isActive} href={link}>
+      {name}
+    </NavbarItem>
   );
 };
 
-SidebarMenuItem.propTypes = {
+const NavbarItem = styled.a`
+  align-self: center;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  width: 100%;
+  transition-duration: 1s;
+  transition: visibility 0s, opacity 0.5s linear;
+  display: ${props => (props.isActive ? 'block' : 'none')};
+  &:hover {
+    background-color: ${props => props.colorBackground};
+  }
+`;
+
+NavbarMenuItem.propTypes = {
   link: PropTypes.string,
-  name: PropTypes.string
+  name: PropTypes.string,
+  isActive: PropTypes.bool
 };
-export default SidebarMenuItem;
+export default NavbarMenuItem;

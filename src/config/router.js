@@ -6,11 +6,9 @@ import {
   Switch
 } from 'react-router-dom';
 
-import Login from '../components/pages/Login';
 import Home from '../components/pages/Home';
 import UploadBooks from '../components/pages/UploadBooks';
 import BooksList from '../components/pages/BooksList';
-import UserBooks from '../components/pages/UserBooks';
 import BookDetails from '../components/pages/BookDetails';
 import BookReader from '../components/pages/BookReader';
 
@@ -19,8 +17,6 @@ const Routes = () => {
     <Router>
       <Switch>
         <Route exact path='/' component={Home} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/user/:userId/books' component={UserBooks} />
         <Route exact path='/books/upload' component={UploadBooks} />
         <Route exact path='/books/:id' component={BookDetails} />
         <Route exact path='/books' component={BooksList} />

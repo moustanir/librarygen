@@ -28,7 +28,7 @@ const Button = ({
 };
 const ButtonComponent = styled.button`
   background-color: ${props =>
-    props.IsInvert ? `${props.fillingColor}` : 'white'};
+    !props.IsInvert ? `${props.fillingColor}` : 'white'};
   border: none;
   color: ${props => props.textColor};
   padding: 16px 32px;
