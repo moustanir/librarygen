@@ -1,4 +1,8 @@
 This project aims to produce a PWA of [LibGen](https://libgen.unblockit.me/) website.
+List of functionnalities available:
+- Get all books uploaded for now
+- Read one of them
+- Upload ui ok but doesn't really upload the file for now
 
 ## Available Scripts
 

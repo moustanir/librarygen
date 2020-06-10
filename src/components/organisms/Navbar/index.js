@@ -31,7 +31,7 @@ const Navbar = props => {
       <NavbarMenuItem
         name={'Uploader un Livre'}
         isActive={isNavbarActive}
-        href='/books/upload'
+        link='/books/upload'
       ></NavbarMenuItem>
     </NavbarMenu>
   );
